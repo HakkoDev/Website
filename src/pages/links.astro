@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { Icon } from 'astro-icon/components'
+import FXServerLog from '@/components/FxServerLog'
+import{ TypewriterEffect } from "@/components/ui/typewriter-effect";
+import { FlipWords } from "@/components/ui/flip-words.tsx"
+
+
+const words = ["harder", "better", "faster", "stronger"]
+const words2 = [
+    {
+        text: "Howdy",
+    },
+    {
+        text: "I'm",
+    },
+    {
+        text: "Hakko!",
+        className: "text-primary",
+    }
+]
+---
+<BaseLayout title="ND Framework" description="ND is the next generation of FiveM Frameworks, with a focus on security, usability and a simple developer experience that fits everyone.">
+    <section class="container grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 items-center gap-6 pt-6 pb-8 md:py-10">
+        <div class="col-span-2">
+            <div class="flex max-w-[980px] flex-col items-start gap-2">
+                <p class="text-2xl">
+                    <TypewriterEffect client:load words={words2}/>
+                </p>
+                <p class="text-muted-foreground max-w-[700px] text-base">
+                    Self-taught "full stack" developer, system administrator, gamer and project advocate.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row lg:flex-row gap-4 mt-4">
+                <a
+                    href="https://ndcore.dev/setup"
+                    target="_blank"
+                    rel="noreferrer"
+                    class={`animate-shimmer ${buttonVariants({ variant: 'default' })}`}
+                >
+                    View Projects
+                </a>
+                <a
+                    href="#about"
+                    target="_blank"
+                    rel="noreferrer"
+                    class={buttonVariants({ variant: 'outline' })}
+                >
+                    Read More
+                </a>
+            </div>
+        </div>
+        <div class="col-span-3">
+            <FXServerLog client:load/>
+        </div>
+    </section>
+</BaseLayout>

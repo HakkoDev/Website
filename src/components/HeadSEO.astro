@@ -1,0 +1,59 @@
+---
+import "@/styles/globals.css";
+import "@/styles/fonts.css";
+import 'atropos/css'
+
+interface Props {
+    title?: string | undefined;
+    description?: string | undefined;
+    ogImage?: URL | undefined;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+if (Astro.props.ogImage === undefined) {
+    Astro.props.ogImage = new URL("og-image.png", canonicalURL);
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+<title>{title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="title" content={title}>
+<meta name="description" content={description}>
+<meta name="keywords" content="fivem, fivem framework, ndcore, nd framework, nd, ndframework, qbcore, qb, esx, esx framework, qbox, ox core, server, prism, prism host, hosting, gta v, gta, grand theft auto, grand theft auto five">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#3b6cde">
+<meta name="language" content="English">
+<meta name="revisit-after" content="5 days">
+<meta name="generator" content={Astro.generator}>
+<link rel="canonical" href={canonicalURL} />
+<meta name="viewprot" content="width=device-width">
+<meta name="msapplication-TileColor" content="#3b6cde">
+<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+<meta name="darkreader-lock">
+
+<meta property="og:site_name" content={title}>
+<meta property="og:title" content={title}>
+<meta property="og:locale" content="en">
+<meta property="og:type" content="website">
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonicalURL}>
+<meta property="og:image" content={ogImage}>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content={canonicalURL}>
+<meta name="twitter:title" content={title}>
+<meta name="twitter:image" content={ogImage}>
+<meta name="twitter:image:alt" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:creator" content="hakko">
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="ND Framework" />
+<link rel="manifest" href="/site.webmanifest" />

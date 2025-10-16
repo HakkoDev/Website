@@ -3,7 +3,6 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import ErrorGif from '@/images/error.gif'
 import { buttonVariants } from "@/components/ui/button";
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components'
 ---
 
 <BaseLayout title="404 - Not Found" description="404 Error — this page was not found">
@@ -18,10 +17,10 @@ import { Icon } from 'astro-icon/components'
             </p>
             <div class="flex flex-row gap-2">
                 <a onclick="history.back()" class={`cursor-pointer inline-flex items-center justify-center ${buttonVariants()}`}>
-                    Go Back <Icon name="tabler:arrow-back" />
+                    Go Back
                 </a>
                 <a href="/" rel="noreferrer" class={`inline-flex items-center justify-center ${buttonVariants()}`}> 
-                    Go Home <Icon name="tabler:home" />
+                    Go Home
                 </a>
             </div>
         </div>

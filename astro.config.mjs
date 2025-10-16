@@ -1,29 +1,14 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from "@tailwindcss/vite";
-import icon from 'astro-icon';
 
 export default defineConfig({
-    integrations: [react(), icon()],
+    integrations: [react()],
     build: {
-        assets: '_nd'
+        assets: '_hakko'
     },
     output: "static",
-    site: 'https://ndcore.dev',
-    // redirects: {
-    //     '/discord': {
-    //         status: 302,
-    //         destination: 'https://discord.gg/andys-development-857672921912836116'
-    //     },
-    //     '/hosting': {
-    //         status: 302,
-    //         destination: "https://prism-host.com"
-    //     },
-    //     '/store': {
-    //         status: 302,
-    //         destination: "https://andyyy.tebex.io"
-    //     }
-    // },
+    site: 'https://hakko.dev',
     vite: {
         plugins: [tailwindcss()],
     }

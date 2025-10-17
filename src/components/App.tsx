@@ -3,7 +3,15 @@ import { useEffect, useState, useRef } from "react";
 export default function App() {
     const canvasRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentSong, setCurrentSong] = useState(0);
     const audioRef = useRef(null);
+
+    const songs = [
+        "/songs/everything_in_its_right_place.mp3",
+        "/songs/a_good_man_with_a_broken_heart.mp3",
+        "/songs/parallel_universe.mp3",
+        "/songs/pyramid_song.mp3",
+    ];
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -55,6 +63,22 @@ export default function App() {
         return () => window.removeEventListener("resize", resize);
     }, []);
 
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return
+
+        audio.volume = 0.3;
+        audio.src = songs[currentSong];
+        audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+
+        const randomIndex = Math.floor(Math.random() * songs.length);
+        setCurrentSong(randomIndex);
+    }, []);
+
+    const handleSongEnd = () => {
+        setCurrentSong((prev) => (prev + 1) % songs.length);
+    };
+
     const toggleMusic = () => {
         const audio = audioRef.current;
         if (!audio) return;
@@ -63,34 +87,42 @@ export default function App() {
             audio.pause();
             setIsPlaying(false);
         } else {
-            audio.volume = 0.3;
-            audio.play().catch((err) => console.log("Autoplay blocked:", err));
-        setIsPlaying(true);
+            audio.play().then(() => setIsPlaying(true));
         }
     };
 
+    const nextSong = () => setCurrentSong((prev) => (prev + 1) % songs.length);
+    const prevSong = () => setCurrentSong((prev) => (prev - 1 + songs.length) % songs.length);
+
     useEffect(() => {
         const audio = audioRef.current;
-        if (audio) {
-            audio.volume = 0.3;
-            audio.play().then(() => {setIsPlaying(true)}).catch(() => {
-                setIsPlaying(false);
-            });
-        }
-    }, []);
+        if (!audio) return
+
+        audio.volume = 0.3;
+        audio.src = songs[currentSong];
+        audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    }, [currentSong]);
 
     return (
         <div className="relative flex flex-col items-center justify-center h-screen text-white bg-black overflow-hidden">
-            <canvas
-                ref={canvasRef}
-                className="absolute inset-0 w-full h-full opacity-40"
-            />
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-40"/>
 
-            <div className="absolute top-5 right-5 rounded-full hover:text-gray-300 transition cursor-pointer" onClick={toggleMusic}>
-                {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9 1H2v1H1v20h1v1h7v-1h1V2H9zM8 3v18H3V3zm14-1V1h-7v1h-1v20h1v1h7v-1h1V2zm-1 1v18h-5V3z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11v-1h-1V9h-2V8h-2V7h-1V6h-2V5h-2V4h-1V3H8V2H6V1H3v1H2v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2zm-2 2h-2v1h-2v1h-1v1h-2v1h-2v1H9v1H7v1H5v1H4V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2z"/></svg> }
+            <div className="absolute top-5 right-5 flex items-center gap-3">
+                <div onClick={prevSong} className="rounded-full hover:text-gray-300 transition cursor-pointer" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13h1v1h1v1h1v1h1v1h1v1h1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H9v-1H8v-2h1v-1h1V9h1V8h1V7h1V6h1V5h1V4h1v1h1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1z"/></svg>
+                </div>
+
+
+                <div onClick={toggleMusic} className="rounded-full hover:text-gray-300 transition cursor-pointer">
+                    {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9 1H2v1H1v20h1v1h7v-1h1V2H9zM8 3v18H3V3zm14-1V1h-7v1h-1v20h1v1h7v-1h1V2zm-1 1v18h-5V3z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11v-1h-1V9h-2V8h-2V7h-1V6h-2V5h-2V4h-1V3H8V2H6V1H3v1H2v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2zm-2 2h-2v1h-2v1h-1v1h-2v1h-2v1H9v1H7v1H5v1H4V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2z"/></svg> }
+                </div>
+
+                <div onClick={nextSong} className="rounded-full hover:text-gray-300 transition cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 11v2h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1H9v1H8v-1H7v-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-2h-1v-1h-1V9h-1V8H9V7H8V6H7V5h1V4h1v1h1v1h1v1h1v1h1v1h1v1h1v1z"/></svg>
+                </div>
             </div>
 
-            <audio ref={audioRef} src="/everything_in_its_right_place.mp3" loop autoPlay></audio>
+            <audio ref={audioRef} src={songs[currentSong]} autoPlay onEnded={handleSongEnd} />
 
             <div className="z-10 text-center px-6 max-w-2xl">
                 <h1 className="text-4xl font-bold mb-6 tracking-widest">Hakko</h1>

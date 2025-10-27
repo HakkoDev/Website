@@ -67,7 +67,7 @@ export default function App() {
         const audio = audioRef.current;
         if (!audio) return
 
-        audio.volume = 0.3;
+        audio.volume = 1.0;
         audio.src = songs[currentSong];
         audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
 
@@ -98,7 +98,7 @@ export default function App() {
         const audio = audioRef.current;
         if (!audio) return
 
-        audio.volume = 0.3;
+        audio.volume = 1.0;
         audio.src = songs[currentSong];
         audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
     }, [currentSong]);
@@ -140,6 +140,9 @@ export default function App() {
                     </a>
                     <a href="https://steamcommunity.com/id/hakko101" className="hover:text-gray-400 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 8h-1v3h1zm-1 3h-3v1h3zm0-4h-3v1h3zm-3 1h-1v3h1zm-4 10H7v1h3zm0-4H8v1h2zm1 1h-1v3h1z"/><path fill="currentColor" d="M23 9v6h-1v2h-1v2h-1v1h-1v1h-2v1h-2v1H9v-1H7v-1H5v-1H4v-1H3v-2H2v-2h1v1h2v1h2v1H6v1h1v1h3v-1h1v-1h1v-2h1v-1h2v-1h2v-1h2v-2h1V8h-1V6h-2V5h-3v1h-2v2h-1v3h-1v1H9v1H7v1H6v-1H4v-1H2v-1H1V9h1V7h1V5h1V4h1V3h2V2h2V1h6v1h2v1h2v1h1v1h1v2h1v2z"/></svg>
+                    </a>
+                    <a href="https://ko-fi.com/hakko" className="hover:text-gray-400 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 3H5v4h2zm4 0H9v4h2zm2 0h2v4h-2zm8 6H3v12h14v-5h4zm-2 5h-2v-3h2zM5 11h10v8H5z"/></svg>
                     </a>
                 </div>
             </div>

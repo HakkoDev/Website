@@ -20,42 +20,42 @@ export default function App() {
         let rainDrops = [];
 
         const resize = () => {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        rainDrops = Array.from({ length: 100 }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            len: Math.random() * 15 + 10,
-            speed: Math.random() * 4 + 2,
-            opacity: Math.random() * 0.3 + 0.2,
-        }));
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            rainDrops = Array.from({ length: 100 }, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                len: Math.random() * 15 + 10,
+                speed: Math.random() * 4 + 2,
+                opacity: Math.random() * 0.3 + 0.2,
+            }));
         };
 
         window.addEventListener("resize", resize);
         resize();
 
         const animate = () => {
-        ctx.clearRect(0, 0, w, h);
-        ctx.strokeStyle = "rgba(255,255,255,0.5)";
-        ctx.lineWidth = 1;
-        ctx.lineCap = "round";
+            ctx.clearRect(0, 0, w, h);
+            ctx.strokeStyle = "rgba(255,255,255,0.5)";
+            ctx.lineWidth = 1;
+            ctx.lineCap = "round";
 
-        rainDrops.forEach((drop) => {
-            ctx.beginPath();
-            ctx.moveTo(drop.x, drop.y);
-            ctx.lineTo(drop.x, drop.y + drop.len);
-            ctx.stroke();
+            rainDrops.forEach((drop) => {
+                ctx.beginPath();
+                ctx.moveTo(drop.x, drop.y);
+                ctx.lineTo(drop.x, drop.y + drop.len);
+                ctx.stroke();
 
-            drop.y += drop.speed;
-            if (drop.y > h) {
-            drop.y = -20;
-            drop.x = Math.random() * w;
-            drop.speed = Math.random() * 4 + 2;
-            drop.len = Math.random() * 15 + 10;
-            }
-        });
+                drop.y += drop.speed;
+                if (drop.y > h) {
+                    drop.y = -20;
+                    drop.x = Math.random() * w;
+                    drop.speed = Math.random() * 4 + 2;
+                    drop.len = Math.random() * 15 + 10;
+                }
+            });
 
-        requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
         };
 
         animate();
@@ -104,21 +104,21 @@ export default function App() {
     }, [currentSong]);
 
     return (
-        <div className="relative flex flex-col items-center justify-center h-screen text-white bg-black overflow-hidden">
-            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-40"/>
+        <div className="relative flex flex-col items-center justify-center h-screen text-white overflow-hidden">
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-40" />
 
-            <div className="absolute top-5 right-5 flex items-center gap-3">
+            <div className="absolute z-20 top-5 right-5 flex items-center gap-3">
                 <div onClick={prevSong} className="rounded-full hover:text-gray-300 transition cursor-pointer" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13h1v1h1v1h1v1h1v1h1v1h1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H9v-1H8v-2h1v-1h1V9h1V8h1V7h1V6h1V5h1V4h1v1h1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13h1v1h1v1h1v1h1v1h1v1h1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1H9v-1H8v-2h1v-1h1V9h1V8h1V7h1V6h1V5h1V4h1v1h1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1z" /></svg>
                 </div>
 
 
                 <div onClick={toggleMusic} className="rounded-full hover:text-gray-300 transition cursor-pointer">
-                    {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9 1H2v1H1v20h1v1h7v-1h1V2H9zM8 3v18H3V3zm14-1V1h-7v1h-1v20h1v1h7v-1h1V2zm-1 1v18h-5V3z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11v-1h-1V9h-2V8h-2V7h-1V6h-2V5h-2V4h-1V3H8V2H6V1H3v1H2v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2zm-2 2h-2v1h-2v1h-1v1h-2v1h-2v1H9v1H7v1H5v1H4V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2z"/></svg> }
+                    {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9 1H2v1H1v20h1v1h7v-1h1V2H9zM8 3v18H3V3zm14-1V1h-7v1h-1v20h1v1h7v-1h1V2zm-1 1v18h-5V3z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11v-1h-1V9h-2V8h-2V7h-1V6h-2V5h-2V4h-1V3H8V2H6V1H3v1H2v20h1v1h3v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h1v-2zm-2 2h-2v1h-2v1h-1v1h-2v1h-2v1H9v1H7v1H5v1H4V3h1v1h2v1h2v1h1v1h2v1h2v1h1v1h2v1h2z" /></svg>}
                 </div>
 
                 <div onClick={nextSong} className="rounded-full hover:text-gray-300 transition cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 11v2h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1H9v1H8v-1H7v-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-2h-1v-1h-1V9h-1V8H9V7H8V6H7V5h1V4h1v1h1v1h1v1h1v1h1v1h1v1h1v1z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 11v2h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1H9v1H8v-1H7v-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-2h-1v-1h-1V9h-1V8H9V7H8V6H7V5h1V4h1v1h1v1h1v1h1v1h1v1h1v1h1v1z" /></svg>
                 </div>
             </div>
 
@@ -128,21 +128,21 @@ export default function App() {
                 <h1 className="text-4xl font-bold mb-6 tracking-widest">Hakko</h1>
 
                 <p className="text-xs italic leading-relaxed mb-10 text-gray-300">
-                    “Promise me one thing will ya? Not asking you to never give up, sometimes you gotta let go. Just don't let anyone change who you are, 'kay?”<br/> <span className="text-xs">- Johnny Silverhand</span>
+                    “Promise me one thing will ya? Not asking you to never give up, sometimes you gotta let go. Just don't let anyone change who you are, 'kay?”<br /> <span className="text-xs">- Johnny Silverhand</span>
                 </p>
 
                 <div className="flex justify-center gap-6 text-2xl">
                     <a href="https://discord.com/users/713900040879341589" className="hover:text-gray-400 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M22 11V8h-1V6h-1V5h-2V4h-3v1H9V4H6v1H4v1H3v2H2v3H1v7h2v1h2v1h2v-2H6v-1h2v1h1v1h6v-1h1v-1h2v1h-1v2h2v-1h2v-1h2v-7ZM9 15H7v-1H6v-2h1v-1h2v1h1v2H9Zm9-1h-1v1h-2v-1h-1v-2h1v-1h2v1h1Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M22 11V8h-1V6h-1V5h-2V4h-3v1H9V4H6v1H4v1H3v2H2v3H1v7h2v1h2v1h2v-2H6v-1h2v1h1v1h6v-1h1v-1h2v1h-1v2h2v-1h2v-1h2v-7ZM9 15H7v-1H6v-2h1v-1h2v1h1v2H9Zm9-1h-1v1h-2v-1h-1v-2h1v-1h2v1h1Z" /></svg>
                     </a>
                     <a href="https://github.com/hakkodev" className="hover:text-gray-400 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23 9v6h-1v2h-1v2h-1v1h-1v1h-1v1h-2v1h-1v-5h-1v-1h1v-1h2v-1h1v-1h1V9h-1V6h-2v1h-1v1h-1V7h-4v1H9V7H8V6H6v3H5v5h1v1h1v1h2v2H7v-1H6v-1H4v1h1v2h1v1h3v3H8v-1H6v-1H5v-1H4v-1H3v-2H2v-2H1V9h1V7h1V5h1V4h1V3h2V2h2V1h6v1h2v1h2v1h1v1h1v2h1v2z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M23 9v6h-1v2h-1v2h-1v1h-1v1h-1v1h-2v1h-1v-5h-1v-1h1v-1h2v-1h1v-1h1V9h-1V6h-2v1h-1v1h-1V7h-4v1H9V7H8V6H6v3H5v5h1v1h1v1h2v2H7v-1H6v-1H4v1h1v2h1v1h3v3H8v-1H6v-1H5v-1H4v-1H3v-2H2v-2H1V9h1V7h1V5h1V4h1V3h2V2h2V1h6v1h2v1h2v1h1v1h1v2h1v2z" /></svg>
                     </a>
                     <a href="https://steamcommunity.com/id/hakko101" className="hover:text-gray-400 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 8h-1v3h1zm-1 3h-3v1h3zm0-4h-3v1h3zm-3 1h-1v3h1zm-4 10H7v1h3zm0-4H8v1h2zm1 1h-1v3h1z"/><path fill="currentColor" d="M23 9v6h-1v2h-1v2h-1v1h-1v1h-2v1h-2v1H9v-1H7v-1H5v-1H4v-1H3v-2H2v-2h1v1h2v1h2v1H6v1h1v1h3v-1h1v-1h1v-2h1v-1h2v-1h2v-1h2v-2h1V8h-1V6h-2V5h-3v1h-2v2h-1v3h-1v1H9v1H7v1H6v-1H4v-1H2v-1H1V9h1V7h1V5h1V4h1V3h2V2h2V1h6v1h2v1h2v1h1v1h1v2h1v2z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M18 8h-1v3h1zm-1 3h-3v1h3zm0-4h-3v1h3zm-3 1h-1v3h1zm-4 10H7v1h3zm0-4H8v1h2zm1 1h-1v3h1z" /><path fill="currentColor" d="M23 9v6h-1v2h-1v2h-1v1h-1v1h-2v1h-2v1H9v-1H7v-1H5v-1H4v-1H3v-2H2v-2h1v1h2v1h2v1H6v1h1v1h3v-1h1v-1h1v-2h1v-1h2v-1h2v-1h2v-2h1V8h-1V6h-2V5h-3v1h-2v2h-1v3h-1v1H9v1H7v1H6v-1H4v-1H2v-1H1V9h1V7h1V5h1V4h1V3h2V2h2V1h6v1h2v1h2v1h1v1h1v2h1v2z" /></svg>
                     </a>
                     <a href="https://ko-fi.com/hakko" className="hover:text-gray-400 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 3H5v4h2zm4 0H9v4h2zm2 0h2v4h-2zm8 6H3v12h14v-5h4zm-2 5h-2v-3h2zM5 11h10v8H5z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 3H5v4h2zm4 0H9v4h2zm2 0h2v4h-2zm8 6H3v12h14v-5h4zm-2 5h-2v-3h2zM5 11h10v8H5z" /></svg>
                     </a>
                 </div>
             </div>
